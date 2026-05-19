@@ -1,16 +1,14 @@
 # Marketplace Scout
 
-An agent-led skill library for Facebook Marketplace — Chrome-history-biased feed scrolling, IMV/SCOPE price analysis, and a Facebook-themed HTML digest.
-
-Marketplace Scout pairs the algorithmic Browse-All feed with your own recent Chrome history (180-day window, 21-day half-life decay), scores each surfaced listing against 90-day local comps using the IMV/SCOPE pricing stack, and writes a single-file HTML report you can open in a browser. From there, optional seller-communication stages draft outreach with per-message approval — never standing approval, never unattended sends.
-
-## What it looks like
-
-The scout report is a hand-authored HTML file the agent writes after each Stage-0 run. It re-ranks the Browse-All feed against your recent Chrome history (180-day window, 21-day half-life recency decay) and shows the top 50 in a Facebook-themed digest with IMV deal labels and offer ladders.
-
 ![Scout report header with IMV deal distribution](docs/screenshots/01-hero.png)
 
-Each card shows the asking price, strikethrough MSRP (when known) with saving %, the IMV verdict block (Great / Good / Fair / High / Overpriced), comp median, condition floor, retail anchor, offer ladder, and a button-style "Open on Marketplace" CTA.
+A skill library for Facebook Marketplace, driven by an agent in your coding-agent session (Hermes / Claude Code / Codex). Buyer-side ambient discovery, topic-driven scouting, deal scoring, negotiation drafts, and pickup planning — plus seller-side intake, draft, publish, and inbox triage. Every seller-facing action requires **per-message approval**; no standing approval, no unattended sends.
+
+The flagship capability is the **scout report** pictured above: a hand-authored HTML digest that pairs the algorithmic Browse-All feed with your own recent Chrome history (180-day window, 21-day half-life decay), scores each surfaced listing against 90-day local comps using the IMV/SCOPE pricing stack, and lands as a single bookmarkable file. From there, the library coordinates the remaining stages — assessing specific listings, drafting outreach, negotiating, and planning pickup.
+
+## What the report shows
+
+Each card displays the asking price, strikethrough MSRP (when known) with saving %, the IMV verdict block (Great / Good / Fair / High / Overpriced), comp median, condition floor, retail anchor, offer ladder, and a button-style "Open on Marketplace" CTA.
 
 ![Single card detail](docs/screenshots/02-top-card.png)
 
@@ -23,6 +21,32 @@ A "Previously viewed" section at the bottom surfaces the Chrome-history listings
 ![Previously viewed history table](docs/screenshots/04-previously-viewed.png)
 
 Browse a synthetic-data demo at [examples/example_scout_report.html](examples/example_scout_report.html).
+
+## Capabilities
+
+The report above is one of several capabilities. The library coordinates the rest of a Marketplace session through stage-specific skills the buyer / seller umbrellas route to:
+
+**Buyer side**
+
+- **Ambient feed scroll (Stage 0)** — produces the scout report shown above. No search query needed; Facebook's algorithm + your history bias decide what surfaces.
+- **Topic-driven scout (Stage 1)** — when you *do* have a specific brief (brand, model, budget), the agent searches Marketplace directly and benchmarks against local comps + retail anchors.
+- **Watch + notify (Stage 2)** — keep an eye on shortlist hits between runs. Cadence is owned by the harness (cron, /loop, push notification), not by this skill.
+- **Deal assessor (Stage 3)** — IMV/SCOPE pricing logic + offer ladder for a specific listing, with a reviewable artifact.
+- **Seller communication (Stage 4)** — drafts an initial inquiry, parses seller replies, proposes counteroffers. *Every outgoing message is drafted by the agent and approved by you before it sends.*
+- **Negotiator (Stage 5)** — deeper negotiation playbook: dossier building, opener variants, seller-posture interpretation, walk-away math.
+- **Pickup planning (Stage 6)** — pickup-vs-ship economics, timing, route, safety constraints, last-mile logistics.
+
+**Seller side**
+
+- **Intake → draft → publish** — collect listing details, write the listing copy, walk through the Marketplace create-item flow with the same approval gates.
+- **Inbox triage** — read-only classification of inbound seller-chat threads.
+- **Listing heartbeat** — periodic visibility on active listings without mutating anything.
+
+**Shared**
+
+- **Chrome history bias** — turns recent browsing into a recency-weighted bias profile that other stages consume.
+
+Every seller-facing action sits behind the same approval gate. See the [Approval policy](#approval-policy) section below for the full rule set.
 
 ## Quickstart
 
