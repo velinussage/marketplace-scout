@@ -19,6 +19,8 @@ facebook-marketplace-buyer
 ├── facebook-marketplace-watch-notifier
 ├── facebook-marketplace-deal-assessor  (IMV/SCOPE pricing stack per card)
 ├── facebook-marketplace-seller-communication  (per-message approval gate)
+├── facebook-marketplace-buyer-inbox-watcher   (Stage 4b — reply detection + intent classification)
+├── facebook-marketplace-buyer-thread-timeout  (Stage 4c — stalled-thread nudge / raise / abandon)
 ├── facebook-marketplace-negotiator
 └── facebook-marketplace-pickup-manager
 ```
@@ -39,6 +41,7 @@ facebook-marketplace-seller
 ├── facebook-marketplace-listing-drafter
 ├── facebook-marketplace-publish-manager
 ├── facebook-marketplace-buyer-inbox-triage
+├── facebook-marketplace-seller-reply-composer  (Stage 5b — per-inbound reply with listing context)
 └── facebook-marketplace-inbox-heartbeat
 ```
 
@@ -98,6 +101,10 @@ It is trying to make noisy Marketplace workflows:
 - `facebook-marketplace-buyer`
 - `facebook-marketplace-seller`
 
+### Shared (cross-side) skills
+- `facebook-marketplace-message-sender` — outbound-send executor; required per-message `approval_token`
+- `facebook-marketplace-safety-guard` — pre-send + inbound classifier (off-platform / deposit / identity / scam)
+
 ### Buyer-side specialist skills
 - `facebook-marketplace-history-seed`
 - `facebook-marketplace-scout`
@@ -106,6 +113,8 @@ It is trying to make noisy Marketplace workflows:
 - `facebook-marketplace-seller-communication`
 - `facebook-marketplace-negotiator`
 - `facebook-marketplace-pickup-manager`
+- `facebook-marketplace-buyer-inbox-watcher` (Stage 4b)
+- `facebook-marketplace-buyer-thread-timeout` (Stage 4c)
 
 ### Seller-side specialist skills
 - `facebook-marketplace-listing-intake`
@@ -113,6 +122,7 @@ It is trying to make noisy Marketplace workflows:
 - `facebook-marketplace-publish-manager`
 - `facebook-marketplace-buyer-inbox-triage`
 - `facebook-marketplace-inbox-heartbeat`
+- `facebook-marketplace-seller-reply-composer` (Stage 5b)
 
 ## Good default validation
 

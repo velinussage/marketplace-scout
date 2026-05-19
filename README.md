@@ -33,6 +33,8 @@ The report above is one of several capabilities. The library coordinates the res
 - **Watch + notify (Stage 2)** — keep an eye on shortlist hits between runs. Cadence is owned by the harness (cron, /loop, push notification), not by this skill.
 - **Deal assessor (Stage 3)** — IMV/SCOPE pricing logic + offer ladder for a specific listing, with a reviewable artifact.
 - **Seller communication (Stage 4)** — drafts an initial inquiry, parses seller replies, proposes counteroffers. *Every outgoing message is drafted by the agent and approved by you before it sends.*
+- **Inbox watcher (Stage 4b)** — once outbound buyer messages exist, polls the tracked threads for new seller replies, classifies each reply's intent (counteroffer / accept / hold-firm / clarification / meetup / decline / suspicious), and surfaces a digest with recommended next-action classes. Read-only.
+- **Thread timeout (Stage 4c)** — for buyer threads where the seller hasn't replied within the configured window (default 36 h), surfaces nudge / raise / abandon options per thread with drafted variants and per-message approval.
 - **Negotiator (Stage 5)** — deeper negotiation playbook: dossier building, opener variants, seller-posture interpretation, walk-away math.
 - **Pickup planning (Stage 6)** — pickup-vs-ship economics, timing, route, safety constraints, last-mile logistics.
 
@@ -45,6 +47,8 @@ The report above is one of several capabilities. The library coordinates the res
 **Shared**
 
 - **Chrome history bias** — turns recent browsing into a recency-weighted bias profile that other stages consume.
+- **Message sender** — single source of truth for actually clicking Send on an approved Marketplace message. Owns the prefilled-opener replacement, native-keystroke entry, byte-for-byte value verification, post-send bubble confirmation, and per-thread state update. Every messaging skill (buyer, seller, negotiator, reply composer, thread timeout) delegates here.
+- **Safety guard** — pre-send guard and post-parse classifier for off-platform payment asks (Venmo / Zelle / Cash App / crypto / wire / gift card), deposit / holdback requests, premature identity exchange (phone / email / address), shipping commitments outside listing policy, and common scam tells.
 
 Every seller-facing action sits behind the same approval gate. See the [Approval policy](#approval-policy) section below for the full rule set.
 
@@ -78,8 +82,10 @@ The library ships these top-level installable skills under `skills/commerce/`:
 - `facebook-marketplace-buyer` — buyer-side coordinator; routes the session through Stage 0–6
 - `facebook-marketplace-seller` — seller-side coordinator; intake → draft → publish → inbox triage → heartbeat
 - `facebook-marketplace-history-seed` — Chrome history → recency-weighted bias profile
-- `facebook-marketplace-seller-communication` — drafts seller messages; **per-message approval gate**
+- `facebook-marketplace-seller-communication` — drafts buyer-to-seller outreach; **per-message approval gate** (delegates the actual send to `facebook-marketplace-message-sender`)
 - `facebook-marketplace-watch-notifier` — Stage 2 watch + notify (cadence is harness-owned, not in scope here)
+- `facebook-marketplace-message-sender` — shared outbound-send executor; owns the click-Send mechanic, prefilled-opener replacement, native-keystroke entry, value verification, post-send confirmation, and state-template update. Requires per-message `approval_token`; refuses to send without one.
+- `facebook-marketplace-safety-guard` — pre-send + inbound classifier for off-platform payment asks, deposits / holdbacks, premature identity exchange, off-policy shipping, and scam tells.
 
 Internal stage references the umbrella skills route to, under `skills/commerce/facebook-marketplace-buyer/references/local/`:
 
@@ -89,7 +95,13 @@ Internal stage references the umbrella skills route to, under `skills/commerce/f
 - `facebook-marketplace-report-generator` — agent-authored HTML
 - `facebook-marketplace-negotiator` — offer ladder, seller posture interpretation
 - `facebook-marketplace-pickup-manager` — pickup timing, safety, last-mile
+- `facebook-marketplace-buyer-inbox-watcher` — Stage 4b inbox polling + reply-intent classification
+- `facebook-marketplace-buyer-thread-timeout` — Stage 4c stalled-thread nudge / raise / abandon
 - `facebook-marketplace-ui` — selector / URL / extraction reference
+
+Internal stage references under `skills/commerce/facebook-marketplace-seller/references/local/`:
+
+- `facebook-marketplace-seller-reply-composer` — Stage 5b per-inbound reply composer with listing-context loader and seller-side counter math
 
 ## Approval policy
 

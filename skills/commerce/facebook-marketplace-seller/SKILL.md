@@ -8,7 +8,7 @@ prerequisites:
 metadata:
   hermes:
     tags: [shopping, facebook, marketplace, seller, listing, publishing, inbox-triage, scheduling, automation-policy]
-    related_skills: [facebook-marketplace-listing-intake, facebook-marketplace-listing-drafter, facebook-marketplace-publish-manager, facebook-marketplace-buyer-inbox-triage, facebook-marketplace-inbox-heartbeat]
+    related_skills: [facebook-marketplace-listing-intake, facebook-marketplace-listing-drafter, facebook-marketplace-publish-manager, facebook-marketplace-buyer-inbox-triage, facebook-marketplace-inbox-heartbeat, facebook-marketplace-seller-reply-composer, facebook-marketplace-message-sender, facebook-marketplace-safety-guard]
     requires_toolsets: [terminal]
 ---
 
@@ -82,6 +82,10 @@ If buyers are already messaging, use `facebook-marketplace-buyer-inbox-triage`:
 - stay inside pricing and scheduling rules
 - when a buyer is ready to pick up, check the seller's real availability first
 - prioritize first real pickup over vague interest when the policy is first-come, first-pickup
+
+### Stage 5b — reply composer (per inbound buyer message)
+
+If a specific buyer message needs a tailored reply that's grounded in the listing facts and the seller's policy, use `facebook-marketplace-seller-reply-composer`. It resolves the inbound to its listing context (cached at `reports/listings/<listing_id>.json`), classifies the buyer's ask against the pattern catalog (still-available / counteroffer / shipping / hold / meetup / etc.), computes counter math against the seller's `floor`, and drafts 2–3 short variants that match real Marketplace-seller voice. All sends route through `facebook-marketplace-message-sender` with per-message approval; suspicious inbound messages are escalated via `facebook-marketplace-safety-guard` instead of replied to.
 
 ### Stage 6 — recurring heartbeat / sale-state continuity
 
@@ -175,6 +179,9 @@ This umbrella is the main seller-side discovery surface. Stage playbooks and rec
 - Publish / relist / price-drop execution: `./references/local/facebook-marketplace-publish-manager.md`
 - Single-pass buyer-thread triage: `./references/local/facebook-marketplace-buyer-inbox-triage.md`
 - Repeated inbox monitoring / queue management: `./references/local/facebook-marketplace-inbox-heartbeat.md`
+- Per-inbound reply composer with listing-context loader (Stage 5b): `./references/local/facebook-marketplace-seller-reply-composer.md`
+- Shared outbound send executor: `../../facebook-marketplace-message-sender/SKILL.md`
+- Shared pre-send + inbound safety guard: `../../facebook-marketplace-safety-guard/SKILL.md`
 
 ## Consolidation Rule
 

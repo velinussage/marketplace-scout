@@ -1,18 +1,20 @@
 ---
 name: facebook-marketplace-seller-communication
 description: "USE WHEN you want the agent to communicate with a Facebook Marketplace seller in a natural buyer voice: ask for info, negotiate within limits, and arrange a meetup after validating availability — with a per-message approval gate (each outgoing draft requires exact-text approval; never standing approval). DON'T USE WHEN you want unattended payments, deposits, or commitments outside approved boundaries."
-version: 1.1.0
+version: 2.0.0
 author: velinussage
 prerequisites:
   commands: [browser-harness]
 metadata:
   hermes:
     tags: [shopping, facebook, marketplace, seller-communication, negotiation, meetup, messaging]
-    related_skills: [facebook-marketplace-buyer, facebook-marketplace-negotiator, facebook-marketplace-pickup-manager, facebook-marketplace-deal-assessor]
+    related_skills: [facebook-marketplace-buyer, facebook-marketplace-negotiator, facebook-marketplace-pickup-manager, facebook-marketplace-deal-assessor, facebook-marketplace-message-sender, facebook-marketplace-safety-guard]
     requires_toolsets: [terminal]
 ---
 
 # Facebook Marketplace Seller Communication
+
+**v2.0+:** Actual message sending is delegated to the shared `facebook-marketplace-message-sender` skill; this skill remains the draft-and-tone authority for buyer-to-seller outreach. Outbound drafts are also pre-checked by `facebook-marketplace-safety-guard` for off-platform asks before sending. Every send still requires the per-message `approval_token` enforced by `message-sender`.
 
 Use this skill when the user has identified a listing they actually want to pursue and now needs the agent to communicate like a competent Marketplace buyer.
 

@@ -8,7 +8,7 @@ prerequisites:
 metadata:
   hermes:
     tags: [shopping, facebook, marketplace, buyer, negotiation, pickup, browser-automation, chrome-history, alerts, pricing]
-    related_skills: [facebook-marketplace-scout, facebook-marketplace-deal-assessor, facebook-marketplace-watch-notifier, facebook-marketplace-seller-communication, facebook-marketplace-negotiator, facebook-marketplace-pickup-manager, facebook-marketplace-history-seed, wishlist]
+    related_skills: [facebook-marketplace-scout, facebook-marketplace-deal-assessor, facebook-marketplace-watch-notifier, facebook-marketplace-seller-communication, facebook-marketplace-negotiator, facebook-marketplace-pickup-manager, facebook-marketplace-history-seed, facebook-marketplace-buyer-inbox-watcher, facebook-marketplace-buyer-thread-timeout, facebook-marketplace-message-sender, facebook-marketplace-safety-guard, wishlist]
     requires_toolsets: [terminal]
 ---
 
@@ -101,6 +101,14 @@ If the user wants to actually pursue a listing, use `facebook-marketplace-seller
 - trigger meetup coordination only after condition / price / timing are good enough
 - keep all seller-facing messages inside explicit approved boundaries and post only as the user's own Facebook account after exact-text approval
 
+### Stage 4b — inbox-watcher
+
+Once one or more buyer messages have been sent, route to `facebook-marketplace-buyer-inbox-watcher` to poll outbound threads for seller replies and classify their intent. Surfaces a digest of new inbound activity with recommended next-action classes (counteroffer / answer / confirm meetup / walk away). Read-only; never sends a reply. Suspicious inbound messages (off-platform asks, scam tells) get tagged via `facebook-marketplace-safety-guard` and escalated to the user.
+
+### Stage 4c — stalled-thread timeout
+
+When `buyer-inbox-watcher` flags threads as stalled (no seller reply within the configured window — default 36 h), route to `facebook-marketplace-buyer-thread-timeout` to surface nudge / raise / abandon options. Each option is a drafted message gated by per-message approval and routed through `facebook-marketplace-message-sender` for the actual send.
+
 ### Stage 5 — negotiation (narrow / advanced)
 
 If the user wants deeper price strategy or reply-by-reply interpretation, use `facebook-marketplace-negotiator` behavior:
@@ -188,6 +196,10 @@ This umbrella is the main buyer-side discovery surface. Stage-specific playbooks
 - Deal-comparison / comp-building details: `./references/local/facebook-marketplace-deal-assessor.md`
 - Negotiation message and offer-ladder details: `./references/local/facebook-marketplace-negotiator.md`
 - Pickup timing / safety / last-mile logistics details: `./references/local/facebook-marketplace-pickup-manager.md`
+- Inbox polling / reply-intent classification (Stage 4b): `./references/local/facebook-marketplace-buyer-inbox-watcher.md`
+- Stalled-thread nudge / raise / abandon flow (Stage 4c): `./references/local/facebook-marketplace-buyer-thread-timeout.md`
+- Shared outbound send executor: `../../facebook-marketplace-message-sender/SKILL.md`
+- Shared pre-send + inbound safety guard: `../../facebook-marketplace-safety-guard/SKILL.md`
 
 ## Consolidation Rule
 
