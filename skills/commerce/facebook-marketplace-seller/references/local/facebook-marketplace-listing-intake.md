@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-listing-intake
-description: USE WHEN you want Hermes to capture a clean Marketplace selling brief before drafting or publishing: exact item identity, condition, flaws, included parts, price floor, scheduling constraints, and automation boundaries. DON'T USE WHEN the listing is already fully specified and you only need copywriting or inbox handling.
+description: USE WHEN you want the agent to capture a clean Marketplace selling brief before drafting or publishing: exact item identity, condition, flaws, included parts, price floor, scheduling constraints, and automation boundaries. DON'T USE WHEN the listing is already fully specified and you only need copywriting or inbox handling.
 version: 1.0.1
 author: velinus
 prerequisites:

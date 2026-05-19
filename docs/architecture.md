@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide Hermes with a reusable Marketplace operations collection that can:
+Provide any coding-agent host (Claude Code, Codex, Hermes, etc.) with a reusable Marketplace operations collection that can:
 
 1. discover listings
 2. benchmark value
@@ -65,7 +65,7 @@ This repo uses multiple focused skills instead of one monolith because:
 - seller-side inbox management is a different runtime problem than buy-side outreach
 - active chats and in-progress sales need continuity, not just one-shot prompts
 - small skills route better and are easier to test
-- Hermes can preload only the stage it needs
+- the agent can preload only the stage it needs
 
 ## Approval model
 
@@ -158,7 +158,7 @@ Design rule:
 - Chrome is running
 - the user is already logged into Facebook in a real browser profile
 - browser-harness has been attached to that browser successfully at least once
-- Hermes is configured to scan this repo's `skills/` directory for `SKILL.md` files
+- the coding-agent host (Hermes, Claude Code, Codex, etc.) is configured to scan this repo's `skills/` directory for `SKILL.md` files
 
 ## Publication hygiene
 
@@ -188,14 +188,14 @@ Proposed template:
 ## Test strategy
 
 ### Stage 1 — structural
-- Hermes can discover the skills from this repo's `skills/` directory
-- Hermes can preload each skill by name
-- Hermes can summarize the workflow and approval gates correctly
+- the agent can discover the skills from this repo's `skills/` directory
+- the agent can preload each skill by name
+- the agent can summarize the workflow and approval gates correctly
 
 ### Stage 2 — browser-ready
 - browser-harness health checks report Chrome running
 - browser-harness can attach to the logged-in browser successfully
-- Hermes can reason about how it would execute each skill without sending messages
+- the agent can reason about how it would execute each skill without sending messages
 
 ### Stage 3 — supervised live trials
 Buyer side:

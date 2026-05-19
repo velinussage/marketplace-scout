@@ -54,7 +54,7 @@ Before publishing, verify the skills:
 
 Before publishing, verify:
 - docs refer to this repo's `skills/` directory generically
-- Hermes setup instructions do not assume one person's `skills.external_dirs` path
+- host-specific setup instructions (e.g. Hermes `skills.external_dirs`, Claude Code skill paths) do not assume one person's local path
 - runtime assumptions are described in generic terms
 - commands are phrased to work from any clone location where possible
 

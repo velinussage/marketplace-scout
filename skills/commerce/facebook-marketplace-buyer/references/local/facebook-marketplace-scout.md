@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-scout
-description: USE WHEN you want Hermes to search Facebook Marketplace from your logged-in browser, compare listings, benchmark price and condition, capture fresh screenshots of promising listings, and produce a ranked shortlist with links and notes. The scout always validates current user interest and captures visual evidence before finishing.
+description: USE WHEN you want the agent to search Facebook Marketplace from your logged-in browser, compare listings, benchmark price and condition, capture fresh screenshots of promising listings, and produce a ranked shortlist with links and notes. The scout always validates current user interest and captures visual evidence before finishing.
 version: 1.2.0
 author: velinussage
 prerequisites:

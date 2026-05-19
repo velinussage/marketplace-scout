@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-seller
-description: "USE WHEN you want Hermes to run an end-to-end Facebook Marketplace selling workflow: capture item facts, price the listing, draft and review the post, prepare or publish it, triage buyer messages, and coordinate pickup under explicit automation boundaries. DON'T USE WHEN you want unbounded autopilot that can take deposits, improvise pricing outside policy, or commit you to a sale without approved rules."
+description: "USE WHEN you want the agent to run an end-to-end Facebook Marketplace selling workflow: capture item facts, price the listing, draft and review the post, prepare or publish it, triage buyer messages, and coordinate pickup under explicit automation boundaries. DON'T USE WHEN you want unbounded autopilot that can take deposits, improvise pricing outside policy, or commit you to a sale without approved rules."
 version: 1.0.1
 author: velinus
 prerequisites:
@@ -28,7 +28,7 @@ It routes the session through the right stage:
 
 Use this skill when:
 - the user wants one seller-side skill to manage the overall Marketplace selling workflow
-- the user wants Hermes to help go from item facts to a live listing
+- the user wants the agent to help go from item facts to a live listing
 - the user wants repeated inbox handling with explicit boundaries
 - the user wants to experiment with bounded auto-sell operations instead of one-off drafting only
 
@@ -106,16 +106,16 @@ Core framing: this is not an auto-lister or unattended selling bot. It is an app
 Use one of these modes explicitly:
 
 ### Draft-only
-- Hermes can gather facts, produce drafts, summarize inbox state, and suggest the next action.
-- Hermes does not publish or send messages.
+- The agent can gather facts, produce drafts, summarize inbox state, and suggest the next action.
+- The agent does not publish or send messages.
 
 ### Approval-gated
-- Hermes can prepare the exact listing text, form-fill plan, or reply text.
+- The agent can prepare the exact listing text, form-fill plan, or reply text.
 - The user approves before publish, send, hold, meetup confirmation, or any material change in terms.
-- When policy or state is incomplete, Hermes should ask the user for clarification through the open gateway / operator contact path instead of guessing.
+- When policy or state is incomplete, the agent should ask the user for clarification through the open gateway / operator contact path instead of guessing.
 
 ### Bounded auto-sell
-- Hermes may publish or reply automatically only inside explicit rules.
+- The agent may publish or reply automatically only inside explicit rules.
 - Rules must define:
   - whether the seller can choose the price directly
   - what happens if no explicit price is given

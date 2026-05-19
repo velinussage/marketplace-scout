@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-feed-scroll
-description: USE WHEN you want Hermes to discover Marketplace listings by passively scrolling the default Browse All feed and letting Facebook's own ranking surface what's interesting, then re-ranking those cards against the user's recent Chrome history bias. Captures detail-page screenshots for the top 3 candidates, then hands off to the report generator. No search query against Marketplace; the feed stays Browse All.
+description: USE WHEN you want the agent to discover Marketplace listings by passively scrolling the default Browse All feed and letting Facebook's own ranking surface what's interesting, then re-ranking those cards against the user's recent Chrome history bias. Captures detail-page screenshots for the top 3 candidates, then hands off to the report generator. No search query against Marketplace; the feed stays Browse All.
 version: 0.7.0
 author: velinussage
 prerequisites:

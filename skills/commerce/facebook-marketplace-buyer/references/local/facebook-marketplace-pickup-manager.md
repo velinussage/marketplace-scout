@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-pickup-manager
-description: USE WHEN you want Hermes to reason about Facebook Marketplace pickup timing, meeting safety, routing, and confirmation messaging with explicit approval before any seller-facing commitment. DON'T USE WHEN you want Hermes to autonomously confirm a meeting, share sensitive details, or handle payment.
+description: USE WHEN you want the agent to reason about Facebook Marketplace pickup timing, meeting safety, routing, and confirmation messaging with explicit approval before any seller-facing commitment. DON'T USE WHEN you want the agent to autonomously confirm a meeting, share sensitive details, or handle payment.
 version: 1.0.0
 author: velinussage
 prerequisites:
@@ -16,7 +16,7 @@ metadata:
 
 This skill handles the last-mile logistics of a promising Marketplace deal.
 
-It helps Hermes:
+It helps the agent:
 - choose reasonable pickup windows
 - balance urgency vs convenience
 - draft safe meeting language
@@ -28,7 +28,7 @@ It helps Hermes:
 Use this skill when:
 - the seller is responsive and a deal looks realistic
 - the user wants help planning the pickup window
-- the user wants Hermes to draft confirmation messages
+- the user wants the agent to draft confirmation messages
 - the user wants help deciding whether a pickup is worth the time
 
 ## Don't Use When

@@ -205,7 +205,7 @@ Recommended framing:
 
 ### P2 — Skill topology is confusing after consolidation
 
-The README lists many absorbed/narrow skills, but the current file tree has only some as top-level `SKILL.md` and several as local references. Hermes users may not know whether to load umbrella skills or subskills.
+The README lists many absorbed/narrow skills, but the current file tree has only some as top-level `SKILL.md` and several as local references. Coding-agent users may not know whether to load umbrella skills or subskills.
 
 Needed:
 

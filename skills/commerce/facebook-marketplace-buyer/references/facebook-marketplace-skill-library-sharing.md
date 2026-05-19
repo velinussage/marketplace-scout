@@ -39,7 +39,7 @@ Frame the library as portable operational judgment, not a one-off browser script
 ## Good post hooks
 
 - “Facebook Marketplace is a good test for agent skills because the hard part is not clicking buttons. The hard part is judgment.”
-- “I packaged my Marketplace ops workflow as a Hermes skill library: scout listings, compare comps, draft offers, triage buyers, and stop before anything seller-facing without approval.”
+- “I packaged my Marketplace ops workflow as a coding-agent skill library (works in Claude Code, Codex, Hermes, etc.): scout listings, compare comps, draft offers, triage buyers, and stop before anything seller-facing without approval.”
 - “A Marketplace agent that can click is a toy. A Marketplace agent that knows when not to send the message is useful.”
 - “This is not an auto-lister bot. It is a set of approval-bounded skills for the messy parts of Marketplace ops.”
 - “The HTML report generator turns noisy Marketplace searches into a clear, reviewable artifact that reflects the user’s actual taste and risk tolerance.”

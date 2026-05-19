@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-publish-manager
-description: USE WHEN you want Hermes to prepare, review, or execute the Marketplace listing publish workflow: map the draft into form fields, check consistency, publish with approval or policy, and manage relist / renew / price-drop actions. DON'T USE WHEN the listing brief is still incomplete or when unbounded autonomous publishing is expected.
+description: USE WHEN you want the agent to prepare, review, or execute the Marketplace listing publish workflow: map the draft into form fields, check consistency, publish with approval or policy, and manage relist / renew / price-drop actions. DON'T USE WHEN the listing brief is still incomplete or when unbounded autonomous publishing is expected.
 version: 1.0.1
 author: velinus
 prerequisites:

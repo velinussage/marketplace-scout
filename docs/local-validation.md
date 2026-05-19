@@ -1,6 +1,6 @@
 # Local Validation
 
-This file records what has actually been validated locally in the Hermes environment.
+This file records what has actually been validated locally. The structural load tests were run inside Hermes; the skills themselves are agent-agnostic and should load in other coding-agent hosts (Claude Code, Codex, etc.) too.
 
 It is intentionally narrower than a full QA claim.
 It separates:
@@ -83,8 +83,8 @@ Interpretation:
 ## What is proven
 
 Proven:
-- skills are structurally loadable in local Hermes
-- Hermes can reason over the skills and restate their approval model
+- skills are structurally loadable in local Hermes (and, by symmetry, in other coding-agent hosts that read `SKILL.md` files)
+- the agent can reason over the skills and restate their approval model
 - the buyer-side and seller-side collections are legible as routed stage-specific capabilities
 
 ## What is not yet proven
@@ -115,7 +115,7 @@ Not yet proven:
 
 ### Pass C — continuity tests
 - fill `docs/deal-state-template.md`
-- reload state in a new Hermes session
+- reload state in a new coding-agent session (Hermes, Claude Code, Codex, etc.)
 - verify queue order / active chats / next-action continuity
 
 ## Open blockers / missing pieces

@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-seller-communication
-description: "USE WHEN you want Hermes to communicate with a Facebook Marketplace seller in a natural buyer voice: ask for info, negotiate within limits, and arrange a meetup after validating availability — with a per-message approval gate (each outgoing draft requires exact-text approval; never standing approval). DON'T USE WHEN you want unattended payments, deposits, or commitments outside approved boundaries."
+description: "USE WHEN you want the agent to communicate with a Facebook Marketplace seller in a natural buyer voice: ask for info, negotiate within limits, and arrange a meetup after validating availability — with a per-message approval gate (each outgoing draft requires exact-text approval; never standing approval). DON'T USE WHEN you want unattended payments, deposits, or commitments outside approved boundaries."
 version: 1.1.0
 author: velinussage
 prerequisites:
@@ -14,7 +14,7 @@ metadata:
 
 # Facebook Marketplace Seller Communication
 
-Use this skill when the user has identified a listing they actually want to pursue and now needs Hermes to communicate like a competent Marketplace buyer.
+Use this skill when the user has identified a listing they actually want to pursue and now needs the agent to communicate like a competent Marketplace buyer.
 
 This skill covers three linked jobs:
 1. ask for missing information
@@ -25,7 +25,7 @@ This skill is about **buyer-to-seller communication style**, not just pricing th
 
 ## What good output looks like
 
-Hermes should sound like a normal, serious local buyer:
+The agent should sound like a normal, serious local buyer:
 - short
 - clear
 - casual but polite
@@ -51,10 +51,10 @@ Good tone:
 ## When to Use
 
 Use this skill when:
-- the user says they want a listing and wants Hermes to reach out
+- the user says they want a listing and wants the agent to reach out
 - the user wants to ask condition / sizing / functionality questions first
 - the user wants negotiation help tied to real pickup availability
-- the user wants Hermes to help line up a meeting time after checking their schedule
+- the user wants the agent to help line up a meeting time after checking their schedule
 - the item is something practical like a cold plunge, chair, desk, appliance, furniture piece, or equipment listing where info + price + pickup are all part of one communication thread
 
 ## Don't Use When
@@ -69,7 +69,7 @@ Do not use this skill when:
 
 **Seller-facing messages must stay inside explicit user-approved boundaries.**
 
-That means Hermes should know before sending anything:
+That means the agent should know before sending anything:
 - whether the user wants info-only, info+offer, or ready-to-meet messaging
 - the user's target price and hard stop
 - the user's availability windows
@@ -97,18 +97,18 @@ Before drafting or sending anything, gather:
   - power / plumbing / loading questions
   - whether testing is required before purchase
 
-Before drafting, Hermes should open the listing in the logged-in browser, confirm the message composer exists, and treat the resulting outbound text as a post from the user's own Facebook account rather than from Hermes.
+Before drafting, the agent should open the listing in the logged-in browser, confirm the message composer exists, and treat the resulting outbound text as a post from the user's own Facebook account rather than from the agent.
 
 Tab hygiene rule:
-- if Hermes opens a fresh listing tab only for inspection, drafting, or message delivery, it should close that tab after the task completes
-- if Hermes is operating in the user's already-active listing tab, it should leave that tab in place
+- if the agent opens a fresh listing tab only for inspection, drafting, or message delivery, it should close that tab after the task completes
+- if the agent is operating in the user's already-active listing tab, it should leave that tab in place
 - the skill should not keep spawning throwaway Marketplace tabs across repeated runs
 
 Important Marketplace UI behavior:
 - opening the composer may surface Facebook's own prefilled opener such as "Hi [name], is this still available?"
 - that prefilled opener must be treated as an unsent draft only
 - exact-text approval for a custom message does **not** authorize sending Facebook's prefilled default
-- Hermes must replace the draft with the approved text before any send action
+- the agent must replace the draft with the approved text before any send action
 
 If the user says "I want it," do **not** skip schedule validation.
 You must still validate real availability before proposing meetup windows.
@@ -209,17 +209,17 @@ Example follow-up with price + timing:
 ### 6. Approval and sending mode
 
 Default rule:
-- Hermes drafts first
+- the agent drafts first
 - the user approves the exact text
-- Hermes sends only the approved text
-- the message is posted through the user's own logged-in Facebook session, not as a separate Hermes identity
+- the agent sends only the approved text
+- the message is posted through the user's own logged-in Facebook session, not as a separate agent identity
 
 For speed, the user may explicitly approve a bounded communication plan such as:
 - ask these two condition questions first
 - negotiate within this price band
 - propose these meetup windows
 
-Even in that case, Hermes should stay inside the approved bounds and not improvise larger commitments.
+Even in that case, the agent should stay inside the approved bounds and not improvise larger commitments.
 
 Never send beyond the approved boundaries on:
 - price ceiling

@@ -125,4 +125,4 @@ At the start of a new session:
 
 ## Cross-session resume test
 
-Create a synthetic or local state file, start a new Hermes session, load the relevant top-level skill, ask the agent to resume from the state file, and verify it identifies current stage, blocked actions, next action, and approval state without inventing missing details.
+Create a synthetic or local state file, start a new coding-agent session (Hermes, Claude Code, Codex, etc.), load the relevant top-level skill, ask the agent to resume from the state file, and verify it identifies current stage, blocked actions, next action, and approval state without inventing missing details.

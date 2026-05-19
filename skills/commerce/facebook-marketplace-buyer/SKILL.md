@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-buyer
-description: "USE WHEN you want Hermes to run a Facebook Marketplace buying workflow: ambient Browse-All feed-scroll discovery (history-biased, IMV/SCOPE-priced HTML report) or topic-driven scout, ranking, and negotiation drafts with per-message approval. DON'T USE WHEN you want unattended autopilot."
+description: "USE WHEN you want the agent to run a Facebook Marketplace buying workflow: ambient Browse-All feed-scroll discovery (history-biased, IMV/SCOPE-priced HTML report) or topic-driven scout, ranking, and negotiation drafts with per-message approval. DON'T USE WHEN you want unattended autopilot."
 version: 1.1.0
 author: velinussage
 prerequisites:
@@ -73,7 +73,7 @@ If the user *does* have a specific product brief, brand, or budget, use `faceboo
 
 If the user wants asynchronous updates, use `facebook-marketplace-watch-notifier` behavior:
 - notify only on worthwhile shortlist hits or strong deals
-- prefer Hermes gateway / background / cron delivery back to the same chat or approved target
+- prefer the harness's notification surface (e.g. Hermes gateway / background / cron, or whatever your coding-agent host exposes) back to the same chat or approved target
 - keep the summary short and actionable
 - never message sellers
 
@@ -94,7 +94,7 @@ If a listing looks promising and the user wants structured judgment plus a revie
 If the user wants to actually pursue a listing, use `facebook-marketplace-seller-communication` behavior:
 - accept a direct Marketplace item URL, bookmarked listing, or manually highlighted active listing as the stage entrypoint
 - open the listing in the user's logged-in browser and verify the message surface is present before drafting anything
-- close any temporary listing tab Hermes opened for that check once the drafting/send step is complete
+- close any temporary listing tab the agent opened for that check once the drafting/send step is complete
 - ask for missing information in a natural seller-facing style
 - negotiate inside approved price bounds
 - validate the user's real availability before proposing meetup times
@@ -163,7 +163,7 @@ hermes chat -q "Use the facebook-marketplace-buyer skill and tell me which stage
 - A fully automatic buyer agent is a bad default; approval-gated supervision is safer and more realistic.
 - Marketplace quality is noisy; scouting quality matters more than message volume.
 - Chrome-history signal can improve scouting, especially when old Marketplace searches reveal real product vocabulary, but it should inform the scout rather than silently dictate it.
-- Post-scout notification should be low-noise and should prefer Hermes gateway / background / cron delivery when available.
+- Post-scout notification should be low-noise and should prefer the harness's notification surface (e.g. Hermes gateway / background / cron, or whatever your coding-agent host exposes) when available.
 - Deal assessment should compare against both new-price anchors and broader used-market distributions, not just nearby vibes.
 - Pickup planning should not begin until price and item reality are sufficiently clear.
 - If browser attachment fails, stop instead of pretending to browse.

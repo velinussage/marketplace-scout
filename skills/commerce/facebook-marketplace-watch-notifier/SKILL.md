@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-watch-notifier
-description: USE WHEN you want Hermes to notify the user after a scout or deal-assessment run, especially through a Hermes gateway chat, cron delivery target, or approved messaging target. DON'T USE WHEN you want Hermes to message sellers, negotiate, or send noisy notifications for weak leads.
+description: USE WHEN you want the agent to notify the user after a scout or deal-assessment run, especially through a Hermes gateway chat, cron delivery target, or other approved messaging target exposed by the coding-agent host. DON'T USE WHEN you want the agent to message sellers, negotiate, or send noisy notifications for weak leads.
 version: 1.0.0
 author: velinussage
 metadata:
@@ -12,7 +12,7 @@ metadata:
 
 # Facebook Marketplace Watch Notifier
 
-Use this skill after scouting or deal assessment when the user wants Hermes to push a summary or alert back through Hermes messaging / gateway surfaces.
+Use this skill after scouting or deal assessment when the user wants the agent to push a summary or alert back through the harness's messaging / gateway surfaces (e.g. Hermes gateway, or whatever your coding-agent host exposes).
 
 Its job is to notify the user about:
 - a new shortlist
@@ -23,14 +23,14 @@ Its job is to notify the user about:
 
 This skill does **not** contact sellers.
 
-**Cadence is harness-owned, not skill-owned.** Scheduling, cron triggers, and push delivery live in the Hermes harness; this skill only formats the payload and chooses the delivery target. Do not invent a polling loop inside the skill.
+**Cadence is harness-owned, not skill-owned.** Scheduling, cron triggers, and push delivery live in the coding-agent harness (e.g. Hermes, Claude Code, Codex); this skill only formats the payload and chooses the delivery target. Do not invent a polling loop inside the skill.
 
 ## When to Use
 
 Use this skill when:
 - the user wants a post-scout summary pushed back automatically
 - scouting or watch jobs run on a schedule
-- Hermes is running inside a gateway-backed chat or channel
+- the agent is running inside a gateway-backed chat or channel
 - the user wants asynchronous alerts for good deals
 
 ## Don't Use When
@@ -43,16 +43,16 @@ Do not use this skill when:
 
 ## Delivery model
 
-Hermes already has gateway-backed delivery patterns.
+Many coding-agent harnesses (Hermes Mobile, Claude Code, Codex) already expose gateway-backed delivery patterns.
 
 Preferred delivery order:
-1. same Hermes gateway chat / channel the job ran in
+1. same gateway chat / channel the job ran in (e.g. the Hermes gateway chat, or the equivalent surface in your host)
 2. cron auto-delivery target
 3. explicit approved messaging target
 4. no-send fallback: write or display the result locally
 
 Practical guidance:
-- for background or messaging-platform runs, prefer native Hermes result delivery back to the same chat
+- for background or messaging-platform runs, prefer the harness's native result delivery back to the same chat (e.g. Hermes gateway when running in Hermes)
 - for scheduled jobs, prefer cron-delivered summaries
 - only use explicit message sending when a target exists and the user wants that behavior
 
@@ -89,9 +89,9 @@ Marketplace watch hit: strong deal
 - Next action: review deal assessment, then approve outreach if you want to message
 ```
 
-### 3. Prefer Hermes-native delivery when available
+### 3. Prefer harness-native delivery when available
 
-If Hermes is running in a gateway session or via background / cron delivery, prefer sending the result back to the same chat or channel.
+If the agent is running in a gateway session or via background / cron delivery (e.g. Hermes gateway, or the equivalent surface in your coding-agent host), prefer sending the result back to the same chat or channel.
 
 Good patterns:
 - background scout finishes and posts back to the same chat

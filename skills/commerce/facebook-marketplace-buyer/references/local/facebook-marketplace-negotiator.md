@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-negotiator
-description: USE WHEN you want Hermes to draft or supervise Facebook Marketplace seller outreach, reason about offer ranges, and manage negotiation with explicit approval gates before every seller-facing action. DON'T USE WHEN you want unattended messaging, automatic deposits, or autonomous commitment to buy.
+description: USE WHEN you want the agent to draft or supervise Facebook Marketplace seller outreach, reason about offer ranges, and manage negotiation with explicit approval gates before every seller-facing action. DON'T USE WHEN you want unattended messaging, automatic deposits, or autonomous commitment to buy.
 version: 1.0.0
 author: velinussage
 prerequisites:
@@ -16,7 +16,7 @@ metadata:
 
 Use this skill after a promising listing has already been identified.
 
-Its job is to help Hermes:
+Its job is to help the agent:
 - decide whether a listing is worth messaging
 - draft strong opener and counteroffer messages
 - interpret seller responses
@@ -30,7 +30,7 @@ Use this skill when:
 - the user wants help drafting an opener
 - the user wants suggested offer bands
 - the user wants help interpreting seller replies
-- the user wants Hermes to optionally send messages, but only with explicit approval
+- the user wants the agent to optionally send messages, but only with explicit approval
 
 ## Don't Use When
 
@@ -44,7 +44,7 @@ Do not use this skill when:
 
 **Every seller-facing action requires explicit approval.**
 
-That means Hermes must pause and ask before:
+That means the agent must pause and ask before:
 - sending the first message
 - sending a counteroffer
 - agreeing to a price
@@ -110,12 +110,12 @@ Classify seller posture as:
 
 For each reply, draft the next best response and explain:
 - what signal the seller gave
-- what Hermes would send next
+- what the agent would send next
 - whether to continue or walk away
 
 ### 5. Approval-gated sending mode
 
-If and only if the user explicitly says to send, Hermes may use browser-harness to send the exact approved message.
+If and only if the user explicitly says to send, the agent may use browser-harness to send the exact approved message.
 
 Required pattern:
 1. show the exact message draft

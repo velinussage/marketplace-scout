@@ -1,10 +1,10 @@
 # Commerce / Facebook Marketplace Collection
 
-This folder contains the buyer-side and seller-side Facebook Marketplace skills for Hermes.
+This folder contains the buyer-side and seller-side Facebook Marketplace skills for any coding-agent host (Claude Code, Codex, Hermes, etc.).
 
 The collection is designed around one practical idea:
 - the operator should not have to load the whole workflow at once
-- Hermes should retrieve the narrow capability that matches the current stage
+- the agent should retrieve the narrow capability that matches the current stage
 - the workflow still needs continuity across stages through a shared deal-state surface
 
 ## Collections

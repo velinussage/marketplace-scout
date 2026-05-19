@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-deal-assessor
-description: USE WHEN you want Hermes to judge how good a Facebook Marketplace deal really is by comparing the listing against local used comps, wider-radius comps, and current new-price anchors, then build a normal price distribution and recommend whether to pursue, negotiate, or skip. DON'T USE WHEN you only need a raw shortlist, or when you want Hermes to message sellers or commit to buy without review.
+description: USE WHEN you want the agent to judge how good a Facebook Marketplace deal really is by comparing the listing against local used comps, wider-radius comps, and current new-price anchors, then build a normal price distribution and recommend whether to pursue, negotiate, or skip. DON'T USE WHEN you only need a raw shortlist, or when you want the agent to message sellers or commit to buy without review.
 version: 1.0.0
 author: velinussage
 prerequisites:

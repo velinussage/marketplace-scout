@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-history-seed
-description: USE WHEN you want Hermes to inspect local Chrome history and turn prior Marketplace searches and product research into candidate search phrases (for Stage 1 scout) or a recency-weighted bias signal (180-day lookback, 21-day exponential decay, for Stage 0 algorithmic-feed re-ranking). DON'T USE WHEN the user already has a clear brief and does not want history input, or Chrome history is unavailable.
+description: USE WHEN you want the agent to inspect local Chrome history and turn prior Marketplace searches and product research into candidate search phrases (for Stage 1 scout) or a recency-weighted bias signal (180-day lookback, 21-day exponential decay, for Stage 0 algorithmic-feed re-ranking). DON'T USE WHEN the user already has a clear brief and does not want history input, or Chrome history is unavailable.
 version: 1.1.0
 author: velinussage
 prerequisites:

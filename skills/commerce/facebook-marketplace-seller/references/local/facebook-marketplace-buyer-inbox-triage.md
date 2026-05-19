@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-buyer-inbox-triage
-description: USE WHEN you want Hermes to manage the seller-side Marketplace inbox: classify incoming buyers, draft or send bounded replies, hold pricing and scheduling boundaries, and escalate suspicious or ambiguous threads. DON'T USE WHEN you want unlimited auto-replies, off-platform payment handling, or meeting commitments outside explicit rules.
+description: USE WHEN you want the agent to manage the seller-side Marketplace inbox: classify incoming buyers, draft or send bounded replies, hold pricing and scheduling boundaries, and escalate suspicious or ambiguous threads. DON'T USE WHEN you want unlimited auto-replies, off-platform payment handling, or meeting commitments outside explicit rules.
 version: 1.0.1
 author: velinus
 prerequisites:
@@ -29,7 +29,7 @@ Use this skill to:
 
 Use this skill when:
 - a listing is live and buyers are messaging
-- the user wants Hermes to handle or pre-handle the inbox
+- the user wants the agent to handle or pre-handle the inbox
 - the user wants bounded auto-sell behavior for repetitive questions and narrow negotiation bands
 
 ## Don't Use When

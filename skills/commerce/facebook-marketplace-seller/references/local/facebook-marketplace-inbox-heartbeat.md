@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-inbox-heartbeat
-description: USE WHEN you want Hermes to run recurring seller-side Facebook Marketplace inbox checks, keep an ordered buyer queue, enforce fixed-price or approved pricing policy, and coordinate first-real-pickup scheduling. DON'T USE WHEN the listing is not live, the seller policy is undefined, or you want unlimited autonomous deal-making.
+description: USE WHEN you want the agent to run recurring seller-side Facebook Marketplace inbox checks, keep an ordered buyer queue, enforce fixed-price or approved pricing policy, and coordinate first-real-pickup scheduling. DON'T USE WHEN the listing is not live, the seller policy is undefined, or you want unlimited autonomous deal-making.
 version: 1.0.0
 author: velinus
 prerequisites:
@@ -32,7 +32,7 @@ Use this skill when:
 - the seller wants repeated inbox monitoring
 - there may be multiple active buyer threads at once
 - the operating rule is first real pickup, not first vague message
-- the seller wants Hermes to keep order without losing context
+- the seller wants the agent to keep order without losing context
 
 ## Don't Use When
 
@@ -44,7 +44,7 @@ Do not use this skill when:
 
 ## Required policy before use
 
-Before heartbeat mode starts, Hermes should know:
+Before heartbeat mode starts, the agent should know:
 - listing title or identifier
 - current listed price
 - whether price is fixed or negotiable

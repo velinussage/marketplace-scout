@@ -1,6 +1,6 @@
 ---
 name: facebook-marketplace-listing-drafter
-description: USE WHEN you want Hermes to turn a seller brief into a strong Marketplace listing draft: pricing approach, title, description, photo checklist, and publish-ready field guidance. DON'T USE WHEN the item facts are still unclear or when the task is to autonomously publish or manage buyer replies without a draft review step.
+description: USE WHEN you want the agent to turn a seller brief into a strong Marketplace listing draft: pricing approach, title, description, photo checklist, and publish-ready field guidance. DON'T USE WHEN the item facts are still unclear or when the task is to autonomously publish or manage buyer replies without a draft review step.
 version: 1.0.1
 author: velinus
 prerequisites:
