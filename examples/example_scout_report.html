@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace Scout Report — Example (synthetic)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --fb-blue: #1877F2;
+    --fb-blue-hover: #166FE5;
+    --fb-surface: #F0F2F5;
+    --fb-card: #FFFFFF;
+    --fb-text: #050505;
+    --fb-text-muted: #65676B;
+    --fb-border: #E4E6EB;
+  }
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--fb-surface);
+    color: var(--fb-text);
+  }
+  .fb-shadow { box-shadow: 0 1px 2px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.08); }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .silhouette { width: 100%; height: 100%; background: #E4E6EB; display: flex; align-items: center; justify-content: center; }
+  .silhouette svg { width: 70%; height: 70%; color: #9CA3AF; }
+</style>
+</head>
+<body class="bg-[var(--fb-surface)] text-[var(--fb-text)]">
+
+  <!-- Synthetic-data banner -->
+  <div class="bg-amber-100 border-b border-amber-300 text-amber-900 text-center text-[13px] py-2 px-4">
+    Example report — synthetic data for demo purposes. Real runs are generated locally and never leave your machine.
+  </div>
+
+  <header class="bg-[var(--fb-blue)] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-3">
+      <div class="size-10 rounded-full bg-white text-[var(--fb-blue)] grid place-items-center font-bold text-2xl">f</div>
+      <div class="flex-1">
+        <h1 class="text-xl font-bold leading-none">Marketplace Scout</h1>
+        <div class="text-xs opacity-90 mt-1">Example run · synthetic data · Browse All feed re-ranked against recent Chrome history</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+
+    <!-- Why these top picks -->
+    <section class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-5 mb-5">
+      <h2 class="text-base font-bold mb-2">Why these top picks</h2>
+      <p class="text-[14px] text-[#050505] leading-relaxed">
+        Top 6 re-ranked from <span class="font-semibold">100</span> feed cards captured across 14 viewports,
+        biased toward your recent browsing — <span class="font-semibold">240</span> Marketplace items
+        viewed in the last 180 days (21-day half-life decay).
+      </p>
+      <p class="text-[13px] text-[#65676B] mt-1">
+        Recent themes: <span class="font-semibold text-[#050505]">furniture · electronics · home decor</span>
+      </p>
+    </section>
+
+    <!-- Summary stats + IMV distribution -->
+    <section class="grid lg:grid-cols-3 gap-4 mb-5">
+      <div class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-5">
+        <div class="text-xs uppercase tracking-wider text-[#65676B] font-semibold mb-2">Run summary</div>
+        <div class="flex items-baseline gap-2">
+          <div class="text-3xl font-bold tabular-nums">6</div>
+          <div class="text-sm text-[#65676B]">top picks</div>
+        </div>
+        <div class="text-[13px] text-[#65676B] mt-2">
+          100 captured · 42 dropped (no comps + low conf) · 0 blocked
+        </div>
+      </div>
+      <div class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-5 lg:col-span-2">
+        <div class="text-xs uppercase tracking-wider text-[#65676B] font-semibold mb-3">IMV deal distribution</div>
+        <div class="flex gap-2 items-end">
+          <div class="flex-1 min-w-0" title="Great deal: 1"><div class="text-[10px] uppercase tracking-wide font-semibold mb-1" style="color:#15803D">Great deal</div><div class="h-7 rounded-md flex items-center justify-center text-sm font-bold" style="background:#DCFCE7;color:#15803D">1</div></div>
+          <div class="flex-1 min-w-0" title="Good deal: 1"><div class="text-[10px] uppercase tracking-wide font-semibold mb-1" style="color:#0F766E">Good deal</div><div class="h-7 rounded-md flex items-center justify-center text-sm font-bold" style="background:#CCFBF1;color:#0F766E">1</div></div>
+          <div class="flex-1 min-w-0" title="Fair: 2"><div class="text-[10px] uppercase tracking-wide font-semibold mb-1" style="color:#92400E">Fair</div><div class="h-7 rounded-md flex items-center justify-center text-sm font-bold" style="background:#FEF3C7;color:#92400E">2</div></div>
+          <div class="flex-1 min-w-0" title="High: 1"><div class="text-[10px] uppercase tracking-wide font-semibold mb-1" style="color:#9A3412">High</div><div class="h-7 rounded-md flex items-center justify-center text-sm font-bold" style="background:#FFEDD5;color:#9A3412">1</div></div>
+          <div class="flex-1 min-w-0" title="Overpriced: 1"><div class="text-[10px] uppercase tracking-wide font-semibold mb-1" style="color:#B91C1C">Overpriced</div><div class="h-7 rounded-md flex items-center justify-center text-sm font-bold" style="background:#FEE2E2;color:#B91C1C">1</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards grid -->
+    <section class="grid lg:grid-cols-2 gap-4">
+
+      <!-- Card 1: Great deal — Lounge Chair -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 50V32a8 8 0 0 1 8-8h16a8 8 0 0 1 8 8v18"/>
+                <path d="M12 50h40"/>
+                <path d="M20 50v6"/>
+                <path d="M44 50v6"/>
+                <path d="M22 32h20"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#1</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">Mid-Century Walnut Lounge Chair with Ottoman</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Anytown, NC · feed pos 7 · score 7.42</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$320</div>
+                <div class="text-xs text-[#65676B] line-through tabular-nums">$1,899</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">83% off MSRP</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#DCFCE7;color:#15803D">
+                <div class="text-xl font-bold tabular-nums leading-none">-46%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">Great deal</div>
+              </div>
+              <div class="text-xs text-[#65676B]">High conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$595</span> · Floor <span class="font-semibold tabular-nums">$505</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$1,899</span> · Trust <span class="font-semibold">4/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$260</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$295</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$340</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$595 for vintage walnut lounge chairs; asking $320 is 46% below comp. Strong deal if frame is solid.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-1" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Good deal — OLED TV -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="8" y="14" width="48" height="30" rx="2"/>
+                <path d="M24 50h16"/>
+                <path d="M32 44v6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#2</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">55” OLED 4K Smart TV — 2024 Model, Original Box</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Somewhere, PA · feed pos 12 · score 6.81</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$780</div>
+                <div class="text-xs text-[#65676B] line-through tabular-nums">$1,499</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">48% off MSRP</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#CCFBF1;color:#0F766E">
+                <div class="text-xl font-bold tabular-nums leading-none">-13%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">Good deal</div>
+              </div>
+              <div class="text-xs text-[#65676B]">High conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$895</span> · Floor <span class="font-semibold tabular-nums">$760</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$1,499</span> · Trust <span class="font-semibold">3/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$680</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$740</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$795</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$895 for similar 55" OLEDs; asking $780 is 13% below. Verify panel condition and burn-in before committing.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-2" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Fair — Floor Lamp -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M24 14h16l-4 14H28z"/>
+                <path d="M32 28v22"/>
+                <path d="M22 56h20"/>
+                <path d="M28 50h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#3</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">Brass Arc Floor Lamp — Marble Base</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Anytown, NC · feed pos 24 · score 5.92</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$185</div>
+                <div class="text-xs text-[#65676B] line-through tabular-nums">$349</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">47% off MSRP</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#FEF3C7;color:#92400E">
+                <div class="text-xl font-bold tabular-nums leading-none">+3%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">Fair</div>
+              </div>
+              <div class="text-xs text-[#65676B]">Medium conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$180</span> · Floor <span class="font-semibold tabular-nums">$153</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$349</span> · Trust <span class="font-semibold">3/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$140</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$160</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$180</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$180 for similar arc lamps; asking $185 is 3% above. Priced at market — only buy if you love it.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-3" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: Fair — Dining Table -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 26h52"/>
+                <path d="M10 26v6"/>
+                <path d="M54 26v6"/>
+                <path d="M14 32v22"/>
+                <path d="M50 32v22"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#4</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">Solid Oak Farmhouse Dining Table — Seats 6</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Somewhere, PA · feed pos 33 · score 5.40</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$425</div>
+                <div class="text-xs text-[#65676B] line-through tabular-nums">$899</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">53% off MSRP</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#FEF3C7;color:#92400E">
+                <div class="text-xl font-bold tabular-nums leading-none">+6%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">Fair</div>
+              </div>
+              <div class="text-xs text-[#65676B]">Medium conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$400</span> · Floor <span class="font-semibold tabular-nums">$340</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$899</span> · Trust <span class="font-semibold">4/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$325</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$375</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$410</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$400; asking $425 is 6% above. Slight room to negotiate; inspect for water rings and table-top splits.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-4" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: High — Sofa -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 36v12h48V36"/>
+                <path d="M8 36a4 4 0 0 1 4-4h40a4 4 0 0 1 4 4"/>
+                <path d="M14 32V22a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v10"/>
+                <path d="M14 48v6"/>
+                <path d="M50 48v6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#5</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">Modern Sectional Sofa, Light Gray Linen</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Anytown, NC · feed pos 41 · score 4.78</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$1,250</div>
+                <div class="text-xs text-[#65676B] line-through tabular-nums">$1,899</div>
+                <div class="text-[11px] text-emerald-700 font-semibold">34% off MSRP</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#FFEDD5;color:#9A3412">
+                <div class="text-xl font-bold tabular-nums leading-none">+24%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">High</div>
+              </div>
+              <div class="text-xs text-[#65676B]">Medium conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$1,010</span> · Floor <span class="font-semibold tabular-nums">$860</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$1,899</span> · Trust <span class="font-semibold">2/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$820</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$950</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$1,050</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$1,010; asking $1,250 is 24% above. Listed recently — wait for a price drop or open low.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-5" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: Overpriced — Houseplant -->
+      <article class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow overflow-hidden">
+        <div class="flex gap-3 p-3">
+          <div class="shrink-0 w-[140px] h-[140px] rounded-md overflow-hidden bg-slate-100">
+            <div class="silhouette">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M32 42V18"/>
+                <path d="M32 28c-6-2-12 0-14 6"/>
+                <path d="M32 24c6-2 12 0 14 6"/>
+                <path d="M32 18c-3-4-2-8 2-10"/>
+                <path d="M22 50h20l-2 8H24z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col gap-2">
+            <div class="flex items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xs text-[#65676B] font-mono">#6</span>
+                  <h3 class="text-[15px] font-semibold text-[#050505] leading-snug line-clamp-2">Large Fiddle Leaf Fig — 6ft, Ceramic Pot</h3>
+                </div>
+                <div class="text-xs text-[#65676B] mt-0.5">Somewhere, PA · feed pos 58 · score 3.92</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-2xl font-bold tabular-nums text-[#050505] whitespace-nowrap">$220</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap">
+              <div class="rounded-md px-3 py-2 flex flex-col items-center justify-center min-w-[110px]" style="background:#FEE2E2;color:#B91C1C">
+                <div class="text-xl font-bold tabular-nums leading-none">+57%</div>
+                <div class="text-[11px] font-semibold mt-0.5 uppercase tracking-wide">Overpriced</div>
+              </div>
+              <div class="text-xs text-[#65676B]">High conf</div>
+            </div>
+
+            <div class="text-[13px] text-[#050505] leading-snug">
+              <div>Comp median <span class="font-semibold tabular-nums">$140</span> · Floor <span class="font-semibold tabular-nums">$119</span> <span class="text-[#65676B]">(Good 0.85×)</span></div>
+              <div>Retail anchor <span class="font-semibold tabular-nums">$199</span> · Trust <span class="font-semibold">3/5</span></div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Open</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$95</div>
+              </div>
+              <div class="rounded-md bg-blue-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#0F766E] tracking-wide font-semibold">Likely</div>
+                <div class="text-base font-bold tabular-nums text-[#0F766E]">$125</div>
+              </div>
+              <div class="rounded-md bg-slate-50 px-2 py-1.5">
+                <div class="text-[10px] uppercase text-[#65676B] tracking-wide font-semibold">Walk</div>
+                <div class="text-base font-bold tabular-nums text-[#050505]">$145</div>
+              </div>
+            </div>
+            <div class="text-[13px] text-[#050505]/80">Comp median ~$140; asking $220 is 57% above. Better deals are routinely available — skip unless the pot alone justifies the price.</div>
+            <div class="flex justify-end mt-1">
+              <a href="#example-listing-6" target="_self" rel="noopener"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[#1877F2] hover:bg-[#166FE5] text-white text-sm font-semibold shadow-sm transition">
+                Open on Marketplace
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-7.293 7.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Previously viewed -->
+    <section class="mt-8">
+      <h2 class="text-lg font-bold mb-2">Previously viewed</h2>
+      <p class="text-[14px] text-[#65676B] mb-4 leading-relaxed">
+        What the bias profile was built from — your last 180 days of Chrome activity.
+        <span class="font-semibold text-[#050505]">240</span> Marketplace items ·
+        <span class="font-semibold text-[#050505]">3</span> Marketplace searches ·
+        <span class="font-semibold text-[#050505]">12</span> recurring research domains.
+      </p>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="lg:col-span-2 bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-4">
+          <div class="text-xs uppercase tracking-wider text-[#65676B] font-semibold mb-2">Top viewed Marketplace listings</div>
+          <div class="max-h-[22rem] overflow-y-auto">
+            <table class="w-full text-left">
+              <tbody>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-700">7×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Mid-Century Walnut Lounge Chair</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-700">5×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">55” OLED 4K Smart TV</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">4×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Brass Arc Floor Lamp</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">4×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Solid Oak Farmhouse Dining Table</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">3×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Modern Sectional Sofa</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">3×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Vintage Wool Area Rug 8×10</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">2×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Mid-century walnut credenza</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">2×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Large Fiddle Leaf Fig</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">2×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Persian-style rug, hand-knotted</span></td></tr>
+                <tr class="border-b border-[#E4E6EB]"><td class="py-1.5 pr-3"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-600">2×</span></td><td class="py-1.5"><span class="text-[#1877F2] text-[13px]">Ceramic table lamp, pair</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-[11px] text-[#65676B] mt-2">Showing top 10 of 240 unique listings, ordered by visit count.</div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-4">
+            <div class="text-xs uppercase tracking-wider text-[#65676B] font-semibold mb-2">Top searches</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">mid-century lounge chair <span class="text-slate-500 text-[11px] font-mono">2×</span></span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">oled tv 55 <span class="text-slate-500 text-[11px] font-mono">1×</span></span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">brass floor lamp <span class="text-slate-500 text-[11px] font-mono">1×</span></span>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl ring-1 ring-[#E4E6EB] fb-shadow p-4">
+            <div class="text-xs uppercase tracking-wider text-[#65676B] font-semibold mb-2">Recurring research domains</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">www.westelm.com <span class="text-slate-500 text-[11px] font-mono">38×</span></span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">www.cb2.com <span class="text-slate-500 text-[11px] font-mono">22×</span></span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">www.rtings.com <span class="text-slate-500 text-[11px] font-mono">18×</span></span>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] bg-slate-100 text-slate-700">www.architecturaldigest.com <span class="text-slate-500 text-[11px] font-mono">14×</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-8 pt-4 border-t border-[#E4E6EB] text-[12px] text-[#65676B]">
+      <p>Marketplace Scout · Example report · Synthetic data, no real listings or sellers.</p>
+      <p class="mt-1">"Open on Marketplace" anchors in this example are placeholder fragments — real reports link to Facebook Marketplace items.</p>
+    </footer>
+  </main>
+</body>
+</html>

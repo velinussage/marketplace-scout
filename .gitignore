@@ -1,0 +1,25 @@
+# Personal scout data (run-derived; never ships)
+reports/bias_*.json
+reports/feed_*.json
+reports/images/feed_*/
+reports/.scout_block_list.txt
+reports/screenshots/
+reports/current_scout_report.html
+reports/marketplace_test_report.html
+
+# Temp / build / OS noise
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+/tmp/
+*.swp
+
+# Editor
+.vscode/
+.idea/
+
+# Memory / agent state outside this repo (defense in depth — should already be elsewhere)
+.claude/
