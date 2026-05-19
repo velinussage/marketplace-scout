@@ -1,7 +1,7 @@
 ---
 name: facebook-marketplace-message-sender
 description: "USE WHEN any other Marketplace skill needs to actually click Send on an approved outbound message: routes to the thread, replaces any Facebook prefilled opener, types the approved text via native keystrokes, verifies the composer value byte-for-byte, clicks Send, confirms the bubble appears in the conversation, and updates the per-thread state file. DON'T USE WHEN no approved exact-text + approval token is in hand — this skill refuses to send without both."
-version: 0.1.0
+version: 0.2.0
 author: velinussage
 prerequisites:
   commands: [browser-harness]
@@ -81,6 +81,17 @@ Field rules:
 | `state_path` | yes | Repo-relative path to the per-thread state JSON. Skill creates it if missing. |
 
 ## Procedure
+
+### Critical execution rule — single heredoc
+
+**All of phases 3–7 (open → clear → type → verify → click → confirm) MUST execute inside ONE `browser-harness <<'PY' ... PY` heredoc.** Each heredoc starts a fresh harness session — splitting the flow across multiple heredocs causes two failures observed in the v0.1.0 run:
+
+1. **Tab pile-up.** Calling `new_tab(THREAD_URL)` in each separate heredoc opens a *new* tab every time instead of reusing the one we already opened. The user's Chrome ends up with a stack of duplicate Marketplace tabs.
+2. **State loss between heredocs.** `ensure_real_tab()` re-attaches to *a* tab, not the one we navigated. The composer state from heredoc N may not be visible in heredoc N+1.
+
+If a phase truly needs to be split (e.g., for caller-driven retry), the second heredoc must `switch_tab(target_id)` to the captured target_id from the first one — never `new_tab(...)` again.
+
+### Phase outline (all in one heredoc)
 
 The whole flow runs inside `browser-harness <<'PY' ... PY` heredocs invoked from Bash. No persisted Python orchestrators.
 
@@ -228,34 +239,64 @@ If `disabled: true`, the typing didn't generate real input events. Return `{ sta
 
 ### 7. Post-send DOM confirmation
 
-Wait up to 8 seconds for the typed text to appear as an outbound bubble in the thread:
+**Critical:** When you click Message on a Marketplace listing, Facebook opens a **Messenger chat-popup overlay** — a small floating window typically in the lower-right of the page — NOT an inline composer in the marketplace page body. The just-sent bubble lives inside this popup, often in a separate React portal. `document.body.innerText` may not surface it, and `[role="row"]` queries against the main page miss it entirely.
+
+The reliable confirmation signals (observed in real runs) are:
+
+1. **The composer popup's input field clears immediately after a successful click.** This is the most robust signal — even if the bubble hasn't rendered yet, the popup's `textarea` is reset to empty.
+2. **A "Sent" or "Delivered" label appears adjacent to the bubble inside the popup.** Facebook attaches this aria-label / text node directly under the just-sent message.
+3. **The popup itself does NOT close.** If it closes, the message did not send (the X click closed the dialog without sending).
+
+Look in the right place. The chat popup is typically structured as:
+- a `div[role="dialog"]` with `aria-label="Chat with <seller name>"` or `aria-label="Messenger"`, OR
+- a div with the listing title text in a header and a composer textarea at the bottom
+
+Verification pattern (still in the same heredoc):
 
 ```bash
-browser-harness <<'PY'
-ensure_real_tab()
+# (continued from phase 6 — same heredoc)
 import time
 deadline = time.time() + 8
 confirmed = False
-snapshot = None
+final = None
 while time.time() < deadline:
-    snapshot = js("""
+    final = js("""
       (() => {
-        // Outbound bubbles on Marketplace render as right-aligned message rows.
-        // Look for the just-sent text appearing in the conversation list.
-        const rows = Array.from(document.querySelectorAll('[role="row"], div[aria-label]'));
-        const allText = rows.map(r => (r.innerText || '').trim()).filter(Boolean);
-        return { rows_count: rows.length, last_5: allText.slice(-5) };
+        // Scan ALL elements for our exact text — popup may be in a portal
+        // outside the marketplace's main body innerText scope.
+        const allText = Array.from(document.querySelectorAll('div, span, p'))
+          .map(el => (el.textContent || '').trim())
+          .filter(t => t.length >= 20 && t.length < 500);
+        // Did our exact text land as a bubble?
+        const fragment = arguments[0];
+        const has_bubble = allText.some(t => t.includes(fragment));
+        // Is the popup composer cleared? (Best signal.)
+        const popup_composers = Array.from(document.querySelectorAll('textarea, [contenteditable="true"]'))
+          .filter(el => el.offsetWidth || el.offsetHeight);
+        const composer_cleared = popup_composers.every(el => {
+          const v = (el.value || el.innerText || '').trim();
+          return v.length === 0;
+        });
+        // Is a "Sent" label present near the bubble?
+        const sent_label = allText.some(t => /^Sent$|^Delivered$/i.test(t.trim()));
+        return { has_bubble, composer_cleared, sent_label, composer_count: popup_composers.length };
       })()
-    """)
-    if any(EXACT_TEXT in line for line in (snapshot.get("last_5") or [])):
+    """, EXACT_TEXT.slice(0, 60))  # use a fragment to dodge wrap/style noise
+    # Strong signal: composer cleared + (bubble or Sent label) found
+    if final.get("composer_cleared") and (final.get("has_bubble") or final.get("sent_label")):
         confirmed = True
         break
     time.sleep(0.5)
-print({ "confirmed": confirmed, "final_snapshot": snapshot })
-PY
+print({ "confirmed": confirmed, "final_snapshot": final })
 ```
 
-If `confirmed: false` after 8 s → `{ status: "send_unverified", reason: "no_bubble_after_send" }`. Do NOT mark the state file as sent; the caller can re-try with fresh approval.
+Notes on the signals:
+- **`composer_cleared` is the strongest single indicator.** Marketplace's send handler clears the popup's input synchronously on a successful submit, before the bubble even renders.
+- **`has_bubble` may be false even on a successful send** if the popup is rendered in a shadow DOM or if our element scan misses it. Don't gate on this alone.
+- **`sent_label` is reliable when present** — Facebook attaches "Sent" directly under outbound bubbles.
+- **`composer_count == 0` after our send means the popup closed**, which is BAD (closed without sending). Treat as send_unverified.
+
+If `confirmed: false` after 8 s → `{ status: "send_unverified", reason: "no_send_confirmation" }`. Do NOT mark the state file as sent; the caller can re-try with fresh approval.
 
 ### 8. Update the per-thread state file
 
@@ -314,6 +355,8 @@ This skill is the bottleneck for every outbound Marketplace message in this libr
 
 ## Pitfalls
 
+- **`new_tab(THREAD_URL)` opens a NEW tab every time.** Calling it in multiple heredocs piles up duplicate Marketplace tabs in the user's Chrome. The whole send flow MUST live in a single heredoc (see "Critical execution rule" at the top of the Procedure section). If you need a follow-up heredoc, capture `target_id` from `list_tabs()` after navigating, then `switch_tab(target_id)` in the next heredoc — do not `new_tab` again.
+- **The post-send chat popup is a Messenger overlay, not an inline page composer.** Clicking Message on a listing opens a floating chat window typically in the lower-right of the viewport. Verification logic that scans `document.body.innerText` for the just-sent bubble may miss the popup entirely depending on Facebook's portal rendering. The reliable post-send signals (in order of strength) are: (1) the popup's textarea is cleared, (2) a "Sent"/"Delivered" label appears near the bubble, (3) the bubble text is somewhere in the document. Gate on signal #1 + (#2 OR #3) — see Phase 7.
 - **Facebook's composer occasionally pre-injects an opener on first-touch of a listing's Message button.** It's silent — the field looks empty at first paint, then a half-second later the opener appears. Always wait at least 600 ms after `new_tab` before reading `composer_first_value`.
 - **Cmd+A on a contenteditable inside an iframe-ish Comet surface sometimes only selects the focused element's text, not all of it.** If the clear pass leaves a residue, the second pass (`press_key("End")` → `Shift+Home` → `Backspace`) handles the edge case.
 - **The Send button can stay disabled for 1–2 s after `type_text` even when keystrokes were real.** Wait briefly between typing and the click probe to avoid a false `send_disabled` result.
