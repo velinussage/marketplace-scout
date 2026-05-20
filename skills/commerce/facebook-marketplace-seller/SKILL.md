@@ -137,6 +137,10 @@ Use one of these modes explicitly:
 - sharing sensitive identity details
 - promising a sale after policy is exceeded or facts are ambiguous
 
+## Runtime Setup
+
+If `browser-harness` is not installed, not attached to the user's Chrome, or the Facebook session is dead, route to **`facebook-marketplace-runtime-setup`** first. That skill covers the one-time `uv tool install -e .`, the Chrome remote-debugging attach, and the Facebook session verification. Every seller stage below assumes the runtime is healthy.
+
 ## Quick Reference
 
 ```bash

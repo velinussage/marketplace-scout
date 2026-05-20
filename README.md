@@ -56,14 +56,28 @@ Every seller-facing action sits behind the same approval gate. See the [Approval
 
 This library has no daemon and no background process. Each run is invoked from a coding-agent session (Hermes, Claude Code, Codex, etc.) attached to this repo.
 
-1. Install `browser-harness` per its project docs and put it on `PATH`.
-2. Attach to your logged-in Chrome once: `browser-harness --setup`.
-3. Verify the runtime: `browser-harness --doctor` should report Chrome reachable and the daemon alive.
-4. Sign into Facebook in that Chrome session.
-5. From an agent session in this repo, invoke the buyer skill with a request like
-   *"scroll the Marketplace feed and show me a report."* The agent loads
-   `skills/commerce/facebook-marketplace-buyer/SKILL.md`, routes to the
-   right stage, and writes the report to `reports/current_scout_report.html`.
+If `browser-harness` isn't installed yet, the `facebook-marketplace-runtime-setup` skill handles the full install + Chrome attach + Facebook verification automatically. Or do it manually:
+
+1. **Install browser-harness** with `uv` (the upstream-recommended path — keeps it editable):
+
+   ```bash
+   command -v uv || curl -LsSf https://astral.sh/uv/install.sh | sh
+   mkdir -p ~/Developer && cd ~/Developer
+   git clone https://github.com/browser-use/browser-harness
+   cd browser-harness
+   uv tool install -e .
+   command -v browser-harness   # confirms ~/.local/bin/browser-harness exists
+   ```
+
+2. **Enable Chrome remote debugging** (one-time per profile): open `chrome://inspect/#remote-debugging` in your Chrome and tick **"Allow remote debugging for this browser instance"**. On Chrome 144+ you'll also need to click **Allow** on the first attach popup.
+
+3. **Verify** the runtime: `browser-harness --doctor` should report `chrome running` and `daemon alive`.
+
+4. **Sign into Facebook** in that same Chrome window.
+
+5. From an agent session in this repo, invoke the buyer skill with a request like *"scroll the Marketplace feed and show me a report."* The agent loads `skills/commerce/facebook-marketplace-buyer/SKILL.md`, routes to the right stage, and writes the report to `reports/current_scout_report.html`.
+
+If any of steps 1–4 fails, route to the **`facebook-marketplace-runtime-setup`** skill — it has the full troubleshooting tree.
 
 ## How it works
 
@@ -79,6 +93,7 @@ A single end-to-end loop, agent-driven through `browser-harness` (CDP). No persi
 
 The library ships these top-level installable skills under `skills/commerce/`:
 
+- `facebook-marketplace-runtime-setup` — **install + attach + verify** the browser-harness runtime against the user's real Chrome and confirm the Facebook session. Run this whenever `--doctor` fails or before first use.
 - `facebook-marketplace-buyer` — buyer-side coordinator; routes the session through Stage 0–6
 - `facebook-marketplace-seller` — seller-side coordinator; intake → draft → publish → inbox triage → heartbeat
 - `facebook-marketplace-history-seed` — Chrome history → recency-weighted bias profile

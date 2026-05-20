@@ -102,6 +102,7 @@ It is trying to make noisy Marketplace workflows:
 - `facebook-marketplace-seller`
 
 ### Shared (cross-side) skills
+- `facebook-marketplace-runtime-setup` — install + attach + verify the browser-harness runtime against the user's real Chrome; confirms the Facebook session
 - `facebook-marketplace-message-sender` — outbound-send executor; required per-message `approval_token`
 - `facebook-marketplace-safety-guard` — pre-send + inbound classifier (off-platform / deposit / identity / scam)
 

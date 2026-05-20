@@ -158,6 +158,10 @@ The rule set is simple:
 - moving to off-platform payment rails
 - disclosing sensitive identity details
 
+## Runtime Setup
+
+If `browser-harness --doctor` fails (no binary, Chrome not running, daemon not alive, or the Facebook session is dead), route to **`facebook-marketplace-runtime-setup`** before any stage runs. That skill handles the one-time `uv tool install -e .` of browser-harness, the Chrome remote-debugging attach, and the Facebook session verification. Every buyer stage below assumes the runtime is healthy.
+
 ## Quick Reference
 
 ```bash
